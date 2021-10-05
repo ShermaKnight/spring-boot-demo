@@ -5,7 +5,6 @@ import org.example.dao.CourseMapper;
 import org.example.dao.OrderMapper;
 import org.example.entities.CourseEntity;
 import org.example.entities.OrderEntity;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

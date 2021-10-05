@@ -8,10 +8,10 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
-public class OrderEntity implements Serializable {
+@TableName("tbl_course")
+public class CourseEntity implements Serializable {
 
     private Long id;
-    private Long userId;
     private String courseName;
     private BigDecimal price;
     private Date createTime;

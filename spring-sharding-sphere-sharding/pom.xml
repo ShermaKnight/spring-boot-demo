@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>spring-sharding-jdbc</artifactId>
+    <artifactId>spring-sharding-sphere-sharding</artifactId>
 
     <dependencies>
         <dependency>
@@ -53,4 +53,5 @@
             <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
+
 </project>

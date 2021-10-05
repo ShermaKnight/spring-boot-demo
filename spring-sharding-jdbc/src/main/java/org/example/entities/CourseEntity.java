@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
+@TableName("tbl_course")
 public class CourseEntity implements Serializable {
 
     private Long id;

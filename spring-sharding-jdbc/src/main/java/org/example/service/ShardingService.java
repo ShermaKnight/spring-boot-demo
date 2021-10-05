@@ -1,10 +1,13 @@
 package org.example.service;
 
-import org.example.entities.Course;
+import org.example.entities.CourseEntity;
+import org.example.entities.OrderEntity;
 
 import java.util.List;
 
 public interface ShardingService {
 
-    List<Course> list(Integer limit, Integer offset);
+    List<CourseEntity> listCourse(Integer limit, Integer offset);
+
+    List<OrderEntity> listOrder(Integer limit, Integer offset);
 }

@@ -2,7 +2,7 @@ package org.example;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.example.dao.CourseMapper;
-import org.example.entities.Course;
+import org.example.entities.CourseEntity;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +18,7 @@ import java.util.stream.IntStream;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class ApplicationTest {
+public class ShardingCourseTest {
 
     @Autowired
     private CourseMapper courseMapper;
@@ -26,28 +26,28 @@ public class ApplicationTest {
     @Test
     public void insertBatch() {
         IntStream.range(0, 50).forEach(i -> {
-            Course course = new Course();
-            course.setCourseName("Nothing");
-            course.setPrice(new BigDecimal(198.00 + i));
-            course.setCreateTime(new Date());
-            course.setUpdateTime(new Date());
-            courseMapper.insert(course);
+            CourseEntity courseEntity = new CourseEntity();
+            courseEntity.setCourseName("Nothing");
+            courseEntity.setPrice(new BigDecimal(198.00 + i));
+            courseEntity.setCreateTime(new Date());
+            courseEntity.setUpdateTime(new Date());
+            courseMapper.insert(courseEntity);
         });
     }
 
     @Test
     public void selectByCondition() {
-        LambdaQueryWrapper<Course> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.ge(Course::getPrice, 230);
+        LambdaQueryWrapper<CourseEntity> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.ge(CourseEntity::getPrice, 230);
         Integer count = courseMapper.selectCount(queryWrapper);
         Assert.assertEquals(new Integer(18), count);
     }
 
     @Test
     public void selectByOrder() {
-        LambdaQueryWrapper<Course> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.ge(Course::getPrice, 230).orderByAsc(Course::getId).last("limit 0,10");
-        List<Course> list = courseMapper.selectList(queryWrapper);
+        LambdaQueryWrapper<CourseEntity> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.ge(CourseEntity::getPrice, 230).orderByAsc(CourseEntity::getId).last("limit 0,10");
+        List<CourseEntity> list = courseMapper.selectList(queryWrapper);
         List<Long> ids = list.stream().map(l -> l.getId()).collect(Collectors.toList());
         System.out.println(ids);
     }

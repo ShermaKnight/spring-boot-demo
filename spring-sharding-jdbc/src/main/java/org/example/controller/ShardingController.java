@@ -17,8 +17,13 @@ public class ShardingController {
     @Autowired
     private ShardingService shardingService;
 
-    @GetMapping("/")
-    public CommonResult list(@RequestParam("limit") Integer limit, @RequestParam("offset") Integer offset) {
-        return new CommonResult(200, "success", shardingService.list(limit, offset));
+    @GetMapping("/course")
+    public CommonResult listCourse(@RequestParam("limit") Integer limit, @RequestParam("offset") Integer offset) {
+        return new CommonResult(200, "success", shardingService.listCourse(limit, offset));
+    }
+
+    @GetMapping("/order")
+    public CommonResult listOrder(@RequestParam("limit") Integer limit, @RequestParam("offset") Integer offset) {
+        return new CommonResult(200, "success", shardingService.listOrder(limit, offset));
     }
 }

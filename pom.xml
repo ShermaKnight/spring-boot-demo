@@ -22,7 +22,6 @@
 
     <modules>
         <module>spring-multiple-datasource</module>
-        <module>spring-sharding-jdbc</module>
         <module>spring-sharding-sphere-sharding</module>
         <module>spring-sharding-sphere-rw</module>
     </modules>

@@ -1,13 +1,16 @@
 package org.example.service;
 
-import org.example.entities.CourseEntity;
-import org.example.entities.OrderEntity;
+import org.example.entities.AddressEntity;
+import org.example.entities.UserEntity;
+import org.example.model.UserCreateRequest;
 
 import java.util.List;
 
 public interface ShardingService {
 
-    List<CourseEntity> listCourse(Integer limit, Integer offset);
+    void create(UserCreateRequest createRequest);
 
-    List<OrderEntity> listOrder(Integer limit, Integer offset);
+    UserEntity getUser(Long id);
+
+    AddressEntity getAddress(Long id);
 }

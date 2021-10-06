@@ -31,6 +31,7 @@
         <module>spring-distributed-session</module>
         <module>spring-message-kafka</module>
         <module>spring-message-rocketmq</module>
+        <module>spring-sharding-sphere-quartz</module>
     </modules>
 
     <dependencyManagement>

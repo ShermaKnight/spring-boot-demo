@@ -1,22 +1,27 @@
 package org.example.controller;
 
 import com.alibaba.fastjson.JSON;
+import lombok.SneakyThrows;
 import org.example.model.UserRequest;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.example.model.UserResponse;
+import org.example.service.UserService;
 import org.springframework.data.redis.core.ReactiveHashOperations;
-import org.springframework.data.redis.core.ReactiveRedisTemplate;
-import org.springframework.data.redis.core.ReactiveStringRedisTemplate;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import javax.annotation.Resource;
+import java.util.Date;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    private ReactiveStringRedisTemplate reactiveStringRedisTemplate;
+    @Resource
+    private UserService userService;
 
     @GetMapping("/hello")
     public Mono<String> hello() {
@@ -24,15 +29,17 @@ public class UserController {
     }
 
     @PostMapping("/")
-    public Mono<Boolean> saveUser(@RequestBody UserRequest userRequest) {
-        ReactiveHashOperations<String, Object, Object> hashOperations = reactiveStringRedisTemplate.opsForHash();
-        return hashOperations.put("USER_HS", String.valueOf(userRequest.getId()), JSON.toJSONString(userRequest));
+    public Mono<Boolean> saveUser(@Validated @RequestBody UserRequest userRequest) {
+        return userService.save(userRequest);
     }
 
     @GetMapping("/{id}")
-    public Mono<UserRequest> get(@PathVariable Long id) {
-        ReactiveHashOperations<String, Object, Object> hashOperations = reactiveStringRedisTemplate.opsForHash();
-        Mono<Object> mono = hashOperations.get("USER_HS", String.valueOf(id));
-        return mono.map(e -> JSON.parseObject((String) e, UserRequest.class));
+    public Mono<UserResponse> get(@PathVariable Long id) {
+        return userService.get(id);
+    }
+
+    @GetMapping("/")
+    public Flux<UserResponse> list() {
+        return userService.list();
     }
 }

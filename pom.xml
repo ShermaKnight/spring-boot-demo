@@ -21,13 +21,16 @@
     </properties>
 
     <modules>
-        <module>spring-multiple-datasource</module>
+        <module>spring-distributed-datasource</module>
         <module>spring-sharding-sphere-sharding</module>
         <module>spring-sharding-sphere-rw</module>
         <module>spring-webflux-streaming</module>
         <module>spring-sharding-sphere-elasticjob</module>
         <module>spring-sharding-sphere-xxljob</module>
         <module>spring-distributed-lock</module>
+        <module>spring-distributed-session</module>
+        <module>spring-message-kafka</module>
+        <module>spring-message-rocketmq</module>
     </modules>
 
     <dependencyManagement>

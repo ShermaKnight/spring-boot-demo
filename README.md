@@ -6,3 +6,4 @@
 - 响应式开发：spring webflux
 - 分布式调度：elastic job lite、xxl-job
 - 分布式锁：mysql实现、etcd实现、zookeeper实现、redis实现
+- 消息队列：kafka、rocketmq

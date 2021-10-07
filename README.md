@@ -7,3 +7,4 @@
 - 分布式调度：elastic job lite、xxl-job、quartz
 - 分布式锁：mysql实现、etcd实现、zookeeper实现、redis实现
 - 消息队列：kafka、rocketmq
+- SSO：spring security + jwt

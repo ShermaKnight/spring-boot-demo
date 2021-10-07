@@ -25,7 +25,7 @@ public class JobController {
         return new CommonResult(200, "success", jobService.listRunningJob());
     }
 
-    @PostMapping("")
+    @PostMapping("/")
     public CommonResult addJob(@Validated @RequestBody JobRequest jobRequest) {
         return new CommonResult(200, "success", jobService.addJob(jobRequest));
     }
@@ -40,7 +40,7 @@ public class JobController {
         return new CommonResult(200, "success", jobService.resumeJob(jobName, jobGroup));
     }
 
-    @DeleteMapping("")
+    @DeleteMapping("/")
     public CommonResult deleteJob(@RequestParam("jobName") String jobName, @RequestParam("jobGroup") String jobGroup) {
         return new CommonResult(200, "success", jobService.deleteJob(jobName, jobGroup));
     }

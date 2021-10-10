@@ -38,6 +38,7 @@
         <module>spring-distributed-cache</module>
         <module>spring-message-redis</module>
         <module>spring-message-redis-producer</module>
+        <module>spring-distributed-websockets</module>
     </modules>
 
     <dependencyManagement>

@@ -2,35 +2,48 @@ package org.example.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Component
-@ServerEndpoint("/api/websocket/{sid}")
+@ServerEndpoint("/chat/groups/{gid}")
 public class WebSocketServer {
 
-    private String sid;
+    private String gid;
     private Session session;
-    private CopyOnWriteArraySet<WebSocketServer> sets = new CopyOnWriteArraySet<>();
+    private final static ConcurrentHashMap<String, List<Session>> groupCache = new ConcurrentHashMap<>();
 
     @OnOpen
-    public void onOpen(Session session, @PathParam("sid") String sid) {
-        this.sid = sid;
+    public void onOpen(Session session, @PathParam("gid") String gid) {
+        this.gid = gid;
         this.session = session;
-        sets.add(this);
-        log.info("open connection: {}, current online: {}", sid, sets.size());
+        if (groupCache.containsKey(gid)) {
+            groupCache.get(gid).add(this.session);
+        } else {
+            List<Session> sessions = new ArrayList<>();
+            sessions.add(this.session);
+            groupCache.put(gid, sessions);
+        }
+        log.info("open connection: {}-{}, current online: {}", gid, session, groupCache.get(gid).size());
     }
 
     @OnClose
     public void onClose() {
-        sets.remove(this);
-        log.info("close connection, current online: {}", sets.size());
+        List<Session> sessions = groupCache.get(this.gid);
+        if (!CollectionUtils.isEmpty(sessions)) {
+            sessions.remove(this.session);
+        }
+        log.info("close connection, current online: {}", groupCache.get(gid).size());
     }
 
     @OnError
@@ -44,14 +57,13 @@ public class WebSocketServer {
     public void onMessage(Session session, String message) {
         this.session = session;
         log.info("receive message: {}", message);
-        try {
-            RemoteEndpoint.Basic remote = this.session.getBasicRemote();
-            for (int i = 1; i <= 10; i++) {
-                TimeUnit.SECONDS.sleep(i);
-                remote.sendText("处理程序" + (i * 10) + "%");
+        groupCache.get(gid).stream().filter(s -> s != session).forEach(s -> {
+            try {
+                RemoteEndpoint.Basic remote = s.getBasicRemote();
+                remote.sendText(message);
+            } catch (IOException e) {
+                log.error("send message failed, {}", e.getMessage());
             }
-        } catch (IOException | InterruptedException e) {
-            log.error("send message failed, {}", e.getMessage());
-        }
+        });
     }
 }

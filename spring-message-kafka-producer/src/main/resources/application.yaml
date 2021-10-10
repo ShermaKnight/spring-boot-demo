@@ -1,0 +1,18 @@
+server:
+  port: 8002
+
+spring:
+  application:
+    name: spring-message-kafka-producer
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  kafka:
+    bootstrap-servers: 192.168.71.128:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: 1
+      retries: 0
+      batch-size: 16384
+      buffer-memory: 33554432

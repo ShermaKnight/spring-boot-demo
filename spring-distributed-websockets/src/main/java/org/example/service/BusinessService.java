@@ -7,6 +7,4 @@ import javax.servlet.http.HttpServletRequest;
 public interface BusinessService {
 
     BusinessResponse getInformation(HttpServletRequest servletRequest);
-
-    BusinessResponse getPermission(HttpServletRequest servletRequest);
 }

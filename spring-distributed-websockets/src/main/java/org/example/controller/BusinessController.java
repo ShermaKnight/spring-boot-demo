@@ -21,8 +21,4 @@ public class BusinessController {
         return new CommonResult(200, "success", businessService.getInformation(servletRequest));
     }
 
-    @GetMapping("/permission")
-    public CommonResult getPermission(HttpServletRequest servletRequest) {
-        return new CommonResult(200, "success", businessService.getPermission(servletRequest));
-    }
 }

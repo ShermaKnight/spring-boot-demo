@@ -16,11 +16,6 @@ public class BusinessServiceImpl implements BusinessService {
         return build(servletRequest);
     }
 
-    @Override
-    public BusinessResponse getPermission(HttpServletRequest servletRequest) {
-        return build(servletRequest);
-    }
-
     private BusinessResponse build(HttpServletRequest servletRequest) {
         BusinessResponse response = new BusinessResponse(new Date());
         response.setPath(servletRequest.getServletPath());

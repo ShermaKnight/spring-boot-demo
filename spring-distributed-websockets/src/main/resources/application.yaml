@@ -1,9 +1,9 @@
 server:
-  port: 8001
+  port: 8002
 
 spring:
   application:
-    name: spring-distributed-session
+    name: spring-distributed-websockets
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8

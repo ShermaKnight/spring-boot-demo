@@ -33,6 +33,11 @@
         <module>spring-message-rocketmq</module>
         <module>spring-sharding-sphere-quartz</module>
         <module>spring-distributed-openapi</module>
+        <module>spring-message-kafka-producer</module>
+        <module>spring-message-rocketmq-producer</module>
+        <module>spring-distributed-cache</module>
+        <module>spring-message-redis</module>
+        <module>spring-message-redis-producer</module>
     </modules>
 
     <dependencyManagement>

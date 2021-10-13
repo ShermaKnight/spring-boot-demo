@@ -7,3 +7,17 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+  data:
+    mongodb:
+      uri: mongodb://session-rw:6164cc05453aa88dc7495f8f@192.168.71.128:27017/session
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /rest-api-docs
+  swagger-ui:
+    path: /swagger-ui
+
+logging:
+  level:
+    org.springframework.data.mongodb.core.MongoTemplat: debug

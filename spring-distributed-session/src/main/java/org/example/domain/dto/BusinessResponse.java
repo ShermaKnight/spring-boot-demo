@@ -1,4 +1,4 @@
-package org.example.domain.vo;
+package org.example.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

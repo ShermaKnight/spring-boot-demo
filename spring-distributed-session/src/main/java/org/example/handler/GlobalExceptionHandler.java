@@ -1,5 +1,7 @@
 package org.example.handler;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.example.domain.dto.CommonResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -11,9 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+    private final Logger logger = LogManager.getLogger();
+
     @ResponseBody
     @ExceptionHandler(value = ServiceException.class)
     public CommonResult serviceException(HttpServletRequest request, ServiceException e) {
+        logger.error("ServiceException {}\n", request.getRequestURI(), e);
         return new CommonResult(e.getCode(), e.getMessage());
     }
 

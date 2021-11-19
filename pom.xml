@@ -39,6 +39,9 @@
         <module>spring-message-redis</module>
         <module>spring-message-redis-producer</module>
         <module>spring-distributed-websockets</module>
+        <module>spring-concurrent-disruptor</module>
+        <module>spring-concurrent-akka</module>
+        <module>spring-concurrent-guava</module>
     </modules>
 
     <dependencyManagement>

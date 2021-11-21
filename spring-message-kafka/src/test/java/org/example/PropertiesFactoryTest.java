@@ -2,7 +2,7 @@ package org.example;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.model.AutoCommitProperties;
-import org.example.model.CommitAsyncProperties;
+import org.example.model.AsyncCommitProperties;
 import org.example.model.PropertiesFactory;
 import org.example.model.PropertiesInterface;
 import org.example.util.CharacterUtil;
@@ -25,7 +25,7 @@ public class PropertiesFactoryTest {
         log.info("properties implement: {}", propertiesFactory.list());
         PropertiesInterface properties = propertiesFactory.getProperties(CharacterUtil.toLowerFirstLetter(AutoCommitProperties.class.getSimpleName()));
         log.info("get properties: {}", properties.getProperties());
-        properties = propertiesFactory.getProperties(CharacterUtil.toLowerFirstLetter(CommitAsyncProperties.class.getSimpleName()));
+        properties = propertiesFactory.getProperties(CharacterUtil.toLowerFirstLetter(AsyncCommitProperties.class.getSimpleName()));
         log.info("get properties: {}", properties.getProperties());
     }
 

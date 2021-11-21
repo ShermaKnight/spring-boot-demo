@@ -14,6 +14,14 @@ public abstract class PropertiesAbstract implements PropertiesInterface {
     }
 
     @Override
+    public Properties getProperties(String bootstrap, String groupId) {
+        HashMap<String, String> extensions = new HashMap<>();
+        extensions.putIfAbsent("bootstrap.servers", bootstrap);
+        extensions.putIfAbsent("group.id", groupId);
+        return getProperties(extensions);
+    }
+
+    @Override
     public Properties getProperties(HashMap<String, String> extensions) {
         Properties properties = bootstrap();
         if (Optional.ofNullable(extensions).isPresent() && extensions.size() > 0) {

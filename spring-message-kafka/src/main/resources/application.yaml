@@ -1,5 +1,5 @@
 server:
-  port: 8002
+  port: 8003
 
 spring:
   application:
@@ -8,7 +8,7 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
   kafka:
-    bootstrap-servers: 192.168.71.128:9092
+    bootstrap-servers: 192.168.71.128:9092,192.168.71.129:9092,192.168.71.130:9092
     consumer:
       enable-auto-commit: false
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer

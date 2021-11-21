@@ -8,7 +8,7 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
   kafka:
-    bootstrap-servers: 192.168.71.128:9092
+    bootstrap-servers: 192.168.71.128:9092,192.168.71.129:9092,192.168.71.130:9092
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer

@@ -9,5 +9,7 @@ public interface PropertiesInterface {
 
     Properties getProperties(HashMap<String, String> extensions);
 
+    Properties getProperties(String bootstrap, String groupId);
+
     Properties getProperties(String bootstrap, String groupId, String clientId, HashMap<String, String> extensions);
 }

@@ -17,7 +17,7 @@ public class BusinessConsumer {
     private final static String topic = "business";
     private final static String groupId = "business-dev";
 
-    @KafkaListener(topics = topic, groupId = groupId)
+    // @KafkaListener(topics = topic, groupId = groupId)
     public void consumer(ConsumerRecord<String, String> record, Acknowledgment acknowledgment) {
         try {
             String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));

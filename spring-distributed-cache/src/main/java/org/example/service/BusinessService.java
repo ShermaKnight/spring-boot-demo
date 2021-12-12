@@ -7,4 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 public interface BusinessService {
 
     BusinessResponse getInformation(HttpServletRequest servletRequest);
+
+    String 
 }

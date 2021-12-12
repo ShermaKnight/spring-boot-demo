@@ -3,14 +3,14 @@ server:
 
 spring:
   application:
-    name: spring-message-kafka-producer
+    name: spring-distributed-cache
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
-  redis:
-    host: 192.168.71.128
-    port: 6479
-    password: NZY8K13NPFTXUNYKOS
-    database: 0
-  cache:
-    type: redis
+#  redis:
+#    host: 192.168.71.128
+#    port: 6479
+#    password: NZY8K13NPFTXUNYKOS
+#    database: 0
+#  cache:
+#    type: redis

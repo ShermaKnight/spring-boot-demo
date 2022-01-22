@@ -11,7 +11,7 @@ public class User {
     private Integer id;
     private String userName;
     private String nickName;
-    private Float salary;
+    private Double salary;
     private Date birthday;
     private List<Address> addresses;
 }

@@ -8,5 +8,4 @@ public interface BusinessService {
 
     BusinessResponse getInformation(HttpServletRequest servletRequest);
 
-    String 
 }

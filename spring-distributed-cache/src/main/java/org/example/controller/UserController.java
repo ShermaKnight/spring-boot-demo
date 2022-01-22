@@ -26,4 +26,9 @@ public class UserController {
     public CommonResult getAddresses(@PathVariable Integer id) {
         return new CommonResult(200, "success", userService.getAddressByUserId(id));
     }
+
+    @GetMapping("/reload")
+    public CommonResult reload() {
+        return new CommonResult(200, "success", userService.reload());
+    }
 }

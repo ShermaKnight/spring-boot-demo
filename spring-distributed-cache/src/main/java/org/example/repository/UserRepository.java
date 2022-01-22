@@ -1,6 +1,7 @@
 package org.example.repository;
 
 import cn.hutool.core.util.RandomUtil;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+@Component
 public class UserRepository {
 
     private static int primary = 1;
@@ -24,7 +26,7 @@ public class UserRepository {
     };
 
     static {
-        IntStream.range(0, 10).forEach(i -> cache.put(i, buildUser(i)));
+        IntStream.range(1, 10).forEach(i -> cache.put(i, buildUser(i)));
     }
 
     private static User buildUser(Integer id) {
@@ -49,6 +51,11 @@ public class UserRepository {
         address.setName(nickName);
         address.setCollect(RandomUtil.randomBoolean());
         return address;
+    }
+
+    public void reload() {
+        cache.clear();
+        IntStream.range(1, 10).forEach(i -> cache.put(i, buildUser(i)));
     }
 
 }

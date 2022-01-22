@@ -2,8 +2,10 @@ package org.example.repository;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class Address {
+public class Address implements Serializable {
 
     private Integer id;
     private Integer userId;

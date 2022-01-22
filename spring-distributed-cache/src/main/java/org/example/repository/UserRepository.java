@@ -58,4 +58,7 @@ public class UserRepository {
         IntStream.range(1, 10).forEach(i -> cache.put(i, buildUser(i)));
     }
 
+    public void reload(Integer key) {
+        cache.put(key, buildUser(key));
+    }
 }

@@ -31,4 +31,9 @@ public class UserController {
     public CommonResult reload() {
         return new CommonResult(200, "success", userService.reload());
     }
+
+    @GetMapping("/reload/{id}")
+    public CommonResult reload(@PathVariable Integer id) {
+        return new CommonResult(200, "success", userService.reload(id));
+    }
 }

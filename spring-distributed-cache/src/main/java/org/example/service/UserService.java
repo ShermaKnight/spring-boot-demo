@@ -9,4 +9,6 @@ public interface UserService {
     List<Address> getAddressByUserId(Integer userId);
 
     boolean reload();
+
+    List<Address> reload(Integer userId);
 }

@@ -5,6 +5,7 @@ import org.example.repository.Address;
 import org.example.repository.User;
 import org.example.repository.UserRepository;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,7 @@ public class UserCollectServiceImpl implements UserService {
     }
 
     @Override
-    @Cacheable(value = "userCollect", key = "targetClass + methodName + #userId")
+    @Cacheable(value = "userCollect", key = "'address:' + #userId")
     public List<Address> getAddressByUserId(Integer userId) {
         log.info("调用程序获取数据");
         User user = UserRepository.cache.get(userId);
@@ -39,5 +40,12 @@ public class UserCollectServiceImpl implements UserService {
     public boolean reload() {
         userRepository.reload();
         return true;
+    }
+
+    @Override
+    @CachePut(value = "userCollect", key = "'address:' + #userId")
+    public List<Address> reload(Integer userId) {
+        userRepository.reload(userId);
+        return getAddressByUserId(userId);
     }
 }

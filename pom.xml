@@ -43,6 +43,7 @@
         <module>spring-concurrent-akka</module>
         <module>spring-concurrent-guava</module>
         <module>spring-distributed-lock-zookeeper</module>
+        <module>spring-distributed-servlet</module>
     </modules>
 
     <dependencyManagement>

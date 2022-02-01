@@ -1,13 +1,10 @@
 package org.example.config;
 
-import cn.hutool.core.map.MapBuilder;
 import com.google.inject.AbstractModule;
-import com.google.inject.Provides;
 import com.google.inject.TypeLiteral;
 import com.google.inject.matcher.Matchers;
 import com.google.inject.multibindings.MapBinder;
 import com.google.inject.multibindings.Multibinder;
-import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import org.example.annotation.Log;
 import org.example.interceptor.LogInterceptor;

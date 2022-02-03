@@ -45,6 +45,9 @@
         <module>spring-distributed-lock-zookeeper</module>
         <module>spring-distributed-servlet</module>
         <module>spring-distributed-guice</module>
+        <module>spring-concurrent-pool</module>
+        <module>spring-source-mybatis</module>
+        <module>spring-source-container</module>
     </modules>
 
     <dependencyManagement>

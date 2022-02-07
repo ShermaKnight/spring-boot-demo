@@ -1,11 +1,9 @@
 package org.example.controller;
 
 import org.example.domain.dto.CommonResult;
+import org.example.domain.vo.UserUpdateRequest;
 import org.example.service.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -19,6 +17,11 @@ public class UserController {
     @GetMapping("/{id}")
     public CommonResult getById(@PathVariable Integer id) {
         return new CommonResult(200, "success", userService.getById(id));
+    }
+
+    @PostMapping("/{id}")
+    public CommonResult updateById(@PathVariable Integer id, @RequestBody UserUpdateRequest updateRequest) {
+        return new CommonResult(200, "success", userService.updateById(id, updateRequest));
     }
 
 }

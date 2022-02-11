@@ -3,7 +3,8 @@ server:
 
 spring:
   application:
-    name: spring-concurrent-guava
+    name: spring-concurrent-disruptor
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+

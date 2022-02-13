@@ -3,19 +3,23 @@ package org.example.actor;
 import akka.actor.*;
 import akka.pattern.PatternsCS;
 import akka.testkit.TestKit;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
 import lombok.SneakyThrows;
 import org.junit.Assert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import scala.concurrent.Future;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
+import java.util.List;
+import java.util.concurrent.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-@DisplayName("Actors测试用例")
-public class ActorTest {
+@DisplayName("Akka Actor测试用例")
+public class AkkaActorTest {
 
     @Test
     @DisplayName("使用tell方法发送消息")
@@ -75,4 +79,23 @@ public class ActorTest {
             " sheets containing Lorem Ipsum passages, and more recently with\n" +
             " desktop publishing software like Aldus PageMaker including\n" +
             "versions of Lorem Ipsum.";
+
+    @Test
+    @SneakyThrows
+    @DisplayName("并发计数")
+    public void count() {
+        ActorSystem actorSystem = ActorSystem.create("test-system");
+        ActorRef actorRef = actorSystem.actorOf(Props.create(CountActor.class), "countActor");
+
+        ExecutorService delegate = Executors.newFixedThreadPool(8);
+        ListeningExecutorService executorService = MoreExecutors.listeningDecorator(delegate);
+        List<? extends ListenableFuture<?>> futures = IntStream.range(0, 8).boxed().map(i -> executorService.submit(() -> {
+            IntStream.range(0, 100000).boxed().forEach(j -> actorRef.tell(new CountActor.CountData(1), ActorRef.noSender()));
+        })).collect(Collectors.toList());
+        Futures.allAsList(futures).get();
+
+        TimeUnit.SECONDS.sleep(10);
+        actorRef.tell(new CountActor.PrintData(), ActorRef.noSender());
+        Future<Terminated> terminateResponse = actorSystem.terminate();
+    }
 }

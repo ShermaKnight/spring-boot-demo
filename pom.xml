@@ -48,6 +48,7 @@
         <module>spring-concurrent-pool</module>
         <module>spring-source-mybatis</module>
         <module>spring-source-container</module>
+        <module>spring-distributed-lock-etcd</module>
     </modules>
 
     <dependencyManagement>

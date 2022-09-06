@@ -7,3 +7,14 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+    default-property-inclusion: NON_EMPTY
+
+oss:
+  bucket: distributed
+  key: ${random.uuid}
+
+notice:
+  uuid: ${random.uuid}
+
+condition:
+  instance: true

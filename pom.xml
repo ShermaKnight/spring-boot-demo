@@ -50,6 +50,8 @@
         <module>spring-source-container</module>
         <module>spring-distributed-lock-etcd</module>
         <module>spring-distributed-configure</module>
+        <module>spring-message-rabbitmq</module>
+        <module>spring-message-rabbitmq-producer</module>
     </modules>
 
     <dependencyManagement>

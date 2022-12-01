@@ -11,16 +11,13 @@ import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Component
-@RocketMQMessageListener(consumerGroup = "business-dev", topic = "business")
-public class BusinessConsumer implements RocketMQListener<String> {
-
-    private final static String topic = "business";
-    private final static String groupId = "business-dev";
+@RocketMQMessageListener(consumerGroup = "summary-dev", topic = "summary")
+public class SummaryConsumer implements RocketMQListener<String> {
 
     @Override
-    public void onMessage(String s) {
+    public void onMessage(String message) {
         String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        log.info("{} receive rocketmq message: {}", now, s);
+        log.info("{} receive rocketmq order message: {}", now, message);
         try {
             TimeUnit.SECONDS.sleep(1);
         } catch (InterruptedException e) {

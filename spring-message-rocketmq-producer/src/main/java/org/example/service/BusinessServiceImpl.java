@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.stream.IntStream;
 
 @Slf4j
 @Service
@@ -38,8 +39,25 @@ public class BusinessServiceImpl implements BusinessService {
         // SendResult sendResult = rocketTemplate.syncSend(topic, message);
 
         // 延时消息 1到18分别对应1s 5s 10s 30s 1m 2m 3m 4m 5m 6m 7m 8m 9m 10m 20m 30m 1h 2h
-        SendResult sendResult = rocketTemplate.syncSend(topic, message, 10 * 1000, 4);
-        log.info("{}", sendResult);
+        // SendResult sendResult = rocketTemplate.syncSend(topic, message, 10 * 1000, 4);
+
+        // 顺序消息
+        String orderTopic = "summary";
+        IntStream.range(0, 10).boxed().parallel().forEach(i -> {
+            String orderId = "ORDER-" + i;
+            Message<String> messageInner = MessageBuilder.withPayload(orderId + "下单").build();
+            rocketTemplate.syncSendOrderly(orderTopic, messageInner, orderId);
+
+            messageInner = MessageBuilder.withPayload(orderId + "结算").build();
+            rocketTemplate.syncSendOrderly(orderTopic, messageInner, orderId);
+
+            messageInner = MessageBuilder.withPayload(orderId + "支付").build();
+            rocketTemplate.syncSendOrderly(orderTopic, messageInner, orderId);
+
+            messageInner = MessageBuilder.withPayload(orderId + "完成").build();
+            rocketTemplate.syncSendOrderly(orderTopic, messageInner, orderId);
+        });
+        // log.info("{}", sendResult);
     }
 
     // 发送异步消息

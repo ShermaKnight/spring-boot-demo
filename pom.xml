@@ -52,6 +52,8 @@
         <module>spring-distributed-configure</module>
         <module>spring-message-rabbitmq</module>
         <module>spring-message-rabbitmq-producer</module>
+        <module>spring-frame-drools</module>
+        <module>spring-frame-activiti</module>
     </modules>
 
     <dependencyManagement>

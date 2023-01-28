@@ -1,0 +1,47 @@
+package rules
+
+import org.example.domain.dto.Order
+
+rule "order_score_zero"
+    no-loop true
+    lock-on-active true
+    salience 1
+    when
+        order : Order(price <= 100)
+    then
+        order.setScore(order.getScore());
+        update(order);
+end
+
+rule "order_score_add100"
+    no-loop true
+    lock-on-active true
+    salience 1
+    when
+        order : Order(price > 100 && price <= 500)
+    then
+        order.setScore(order.getScore() + 100);
+        update(order);
+end
+
+rule "order_score_add500"
+    no-loop true
+    lock-on-active true
+    salience 1
+    when
+        order : Order(price > 500 && price <= 1000)
+    then
+        order.setScore(order.getScore() + 500);
+        update(order);
+end
+
+rule "order_score_add1000"
+    no-loop true
+    lock-on-active true
+    salience 1
+    when
+        order : Order(price > 1000)
+    then
+        order.setScore(order.getScore() + 1000);
+        update(order);
+end

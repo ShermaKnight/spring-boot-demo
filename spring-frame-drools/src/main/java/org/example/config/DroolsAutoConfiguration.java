@@ -8,6 +8,7 @@ import org.kie.api.runtime.KieSession;
 import org.kie.internal.io.ResourceFactory;
 import org.kie.spring.KModuleBeanFactoryPostProcessor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
@@ -17,6 +18,7 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 import java.io.IOException;
 
 @Configuration
+@ConditionalOnProperty(name = "drools.auto_configure", havingValue = "true")
 public class DroolsAutoConfiguration {
 
     private static final String RULES_PATH = "rules/";
